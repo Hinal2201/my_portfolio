@@ -7,6 +7,7 @@ import {
   BrainCircuit,
   Check,
   Download,
+  FileText,
   Github,
   Linkedin,
   Mail,
@@ -65,8 +66,11 @@ const experiences = [
       <>
         Used MLflow for experiment tracking and model versioning, and monitored model performance and data drift to guide retraining.
       </>,
+      <>
+        Contributed to an enterprise e-membership application using <strong>ASP.NET Core</strong>, including REST API development.
+      </>,
     ],
-    tags: ['Python', 'scikit-learn', 'XGBoost', 'Azure ML', 'MLflow'],
+    tags: ['Python', 'scikit-learn', 'XGBoost', 'Azure ML', 'MLflow', 'ASP.NET Core', 'REST APIs'],
     mark: 'FI',
   },
   {
@@ -128,6 +132,26 @@ const projects = [
     visualLabel: 'CLIMATE · TIME SERIES',
     date: 'SEP — DEC 2024',
   },
+  {
+    number: '03',
+    type: 'DOCUMENT AI · RETRIEVAL-AUGMENTED GENERATION',
+    title: 'Clinical Document AI Workbench',
+    description:
+      'A document question-answering prototype developed during my time at Vena Medical. It combines semantic retrieval with LLM-generated answers and inspectable source evidence.',
+    approach: [
+      'Ingested PDF, TXT, and Markdown documents, retaining source filenames and PDF page metadata.',
+      'Split text into overlapping passages with LangChain and indexed OpenAI embeddings in persistent local ChromaDB storage.',
+      'Retrieved relevant passages and generated answers through a LangChain pipeline and an OpenAI chat model.',
+      'Built a Streamlit interface for uploads, indexing, questions, and source excerpts; tested chunking and source metadata with Pytest.',
+    ],
+    tools: ['Python', 'LangChain', 'RAG', 'OpenAI API', 'ChromaDB', 'Streamlit', 'PyPDF', 'Pytest'],
+    icon: <FileText size={21} strokeWidth={1.7} />,
+    visual: 'project-visual--documents',
+    visualLabel: 'DOCUMENT → EVIDENCE',
+    date: 'DEMONSTRATION PROTOTYPE',
+    disclaimer:
+      'Learning and demonstration only—not a medical device, diagnostic tool, or clinically validated system. Use synthetic or non-sensitive documents only; never upload patient records or confidential company documents. Source references do not guarantee answer correctness.',
+  },
 ]
 
 const skillGroups = [
@@ -165,6 +189,7 @@ const skillGroups = [
       'LangChain',
       'RAG',
       'FAISS',
+      'ChromaDB',
       'Azure OpenAI',
       'OpenAI API',
       'Computer vision',
@@ -194,7 +219,13 @@ const skillGroups = [
     label: 'APIs & visualization',
     description: 'Making predictions and insights accessible beyond the notebook.',
     featured: ['Flask', 'FastAPI'],
-    skills: ['Flask', 'FastAPI', 'REST APIs', 'Power BI', 'Tableau', 'KPI dashboards'],
+    skills: ['Flask', 'FastAPI', 'REST APIs', 'Streamlit', 'Power BI', 'Tableau', 'KPI dashboards'],
+  },
+  {
+    label: 'Software development',
+    description: 'Experience with web interfaces, enterprise applications, and REST API development.',
+    featured: ['React', 'JavaScript', 'ASP.NET Core'],
+    skills: ['React', 'JavaScript', 'ASP.NET Core', 'REST API development'],
   },
 ]
 
@@ -257,7 +288,7 @@ function App() {
             </h1>
             <p className="hero-description">
               I&apos;m Hinal — an AI engineer building practical machine learning solutions across healthcare, finance, and applied
-              research.
+              research, with additional experience in React, JavaScript, and ASP.NET Core enterprise applications.
             </p>
             <a className="hero-skills" href="#skills" aria-label="Explore my skills in Python, PyTorch, RAG, and Azure ML">
               <span>Python</span>
@@ -368,6 +399,10 @@ function App() {
               useful outside the notebook.
             </p>
             <p>
+              On the software development side, I have experience with React and JavaScript, and contributed to an enterprise
+              e-membership application and REST API development using ASP.NET Core at Fortune Infosys.
+            </p>
+            <p>
               I hold a Master of Applied Computing from Wilfrid Laurier University and a Bachelor of Engineering in Information and
               Communication Technology from Gujarat Technological University.
             </p>
@@ -446,7 +481,7 @@ function App() {
                       <span className="molecule-node molecule-node--f" />
                       <div className="molecule-core">IC₅₀</div>
                     </div>
-                  ) : (
+                  ) : project.number === '02' ? (
                     <div className="climate-graphic" aria-hidden="true">
                       <div className="chart-axis chart-axis--vertical" />
                       <div className="chart-axis chart-axis--horizontal" />
@@ -475,10 +510,21 @@ function App() {
                       <span className="chart-label chart-label--top">FORECAST</span>
                       <span className="chart-label chart-label--bottom">TIME →</span>
                     </div>
+                  ) : (
+                    <div className="document-graphic" aria-hidden="true">
+                      <div className="document-graphic__source">
+                        <FileText size={34} strokeWidth={1.5} />
+                        <span>PDF / TXT / MD</span>
+                      </div>
+                      <ArrowDown size={24} />
+                      <div className="document-graphic__retrieval">Semantic retrieval</div>
+                      <ArrowDown size={24} />
+                      <div className="document-graphic__answer">Answer + source evidence</div>
+                    </div>
                   )}
                   <div className="project-visual__bottom">
                     {project.icon}
-                    <span>APPLIED RESEARCH</span>
+                    <span>{project.number === '03' ? 'RAG WORKFLOW' : 'APPLIED RESEARCH'}</span>
                     <span>{project.date}</span>
                   </div>
                 </div>
@@ -504,6 +550,7 @@ function App() {
                       </span>
                     ))}
                   </div>
+                  {project.disclaimer && <p className="project-disclaimer">{project.disclaimer}</p>}
                 </div>
               </article>
             ))}
@@ -514,8 +561,8 @@ function App() {
           <div className="page-wrap">
             <SectionHeading eyebrow="MY TOOLKIT" title="The right tool for the question." />
             <p className="skills-intro">
-              A practical toolkit across the full machine learning lifecycle—from understanding messy data to putting reliable models
-              into use.
+              A practical toolkit across machine learning and software development—from understanding messy data to building web
+              interfaces, enterprise applications, and REST APIs.
             </p>
             <div className="skills-grid">
               {skillGroups.map((group, index) => (

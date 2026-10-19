@@ -2,6 +2,8 @@
 
 A responsive personal portfolio built with React, TypeScript, and Vite. It presents Hinal's experience in machine learning, selected projects, technical toolkit, education, and contact links.
 
+The portfolio also covers React, JavaScript, ASP.NET Core, and enterprise REST API development. The Clinical Document AI Workbench project is presented as a demonstration prototype with its responsible-use limitations, not as a clinically validated product. The downloadable PDF is maintained separately; website content changes do not update the resume automatically.
+
 ## Run locally
 
 Requirements: Node.js 20.19+ or 22.12+.
